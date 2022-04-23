@@ -152,3 +152,8 @@ hr {
 .discussion-thread--wrapper .discussion-thread--wrapper {
   margin-top: 2rem;
   padding-left: 3rem; }
+
+.threads-placeholder {
+  opacity: 0.3;
+  font-size: 2rem;
+  text-align: center; }
