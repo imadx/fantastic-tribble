@@ -14,10 +14,10 @@ model Thread {
   authorId       String
   message        String
   upvotes        Int      @default(0)
-  author         Author   @relation(fields: [authorId], references: [id])
-  parentThread   Thread?  @relation("ThreadFollows", references: [id], fields: [parentThreadId])
-  childThreads   Thread[] @relation("ThreadFollows")
   parentThreadId String?
+  author         Author   @relation(fields: [authorId], references: [id])
+  parentThread   Thread?  @relation("ThreadFollows", fields: [parentThreadId], references: [id])
+  childThreads   Thread[] @relation("ThreadFollows")
 }
 
 model Author {
