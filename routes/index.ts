@@ -59,4 +59,19 @@ router.post('/thread/:threadId/upvote', async (req, res) => {
   res.status(201).json({ count });
 });
 
+router.post('/thread/:threadId/reply', async (req, res) => {
+  if (!req.body.message) {
+    res.redirect('/');
+    return;
+  }
+
+  await threadService.addReply(
+    req.cookies[userIdCookie],
+    req.params.threadId,
+    req.body.message
+  );
+
+  res.redirect('/');
+});
+
 export default router;

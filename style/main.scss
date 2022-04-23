@@ -115,9 +115,6 @@ hr {
 
   .discussion-thread {
     display: flex;
-
-    .content {
-    }
   }
 }
 
@@ -125,6 +122,7 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  flex: 1;
 
   .summary {
     gap: 0.5rem;
@@ -202,7 +200,27 @@ hr {
   }
 }
 
+.discussion-thread--form {
+  margin: 0;
+  pointer-events: none;
+  transform: translateY(-1rem);
+  opacity: 0;
+  height: 0;
+  transition: margin 0.15s, transform 0.3s, opacity 0.15s ease-in;
+
+  &.discussion-thread--form--visible {
+    margin: 1rem 0;
+    pointer-events: all;
+    height: 2rem;
+    opacity: 1;
+    transform: translateY(0);
+    transition: margin 0.15s, transform 0.3s, opacity 0.3s ease-out;
+  }
+}
+
 .discussion-thread--wrapper {
+  margin-bottom: 1rem;
+
   &.discussion-thread--has-nested {
     position: relative;
 

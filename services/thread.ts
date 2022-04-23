@@ -5,6 +5,9 @@ import { broadcastUpvoteChangedEvent } from './socket';
 export const find = async () => {
   return prisma.thread.findMany({
     orderBy: { createdAt: 'desc' },
+    where: {
+      parentThreadId: null,
+    },
     select: {
       message: true,
       createdAt: true,
@@ -17,16 +20,36 @@ export const find = async () => {
           photoURL: true,
         },
       },
+      childThreads: {
+        select: {
+          message: true,
+          createdAt: true,
+          id: true,
+          upvotes: true,
+          author: {
+            select: {
+              id: true,
+              name: true,
+              photoURL: true,
+            },
+          },
+        },
+      },
     },
   });
 };
 
-export const create = async (authorId: string, payload: ThreadPayload) => {
+export const create = async (
+  authorId: string,
+  payload: ThreadPayload,
+  parentThreadId?: string
+) => {
   const thread = await prisma.thread.create({
     data: {
       message: payload.message,
       upvotes: 0,
       authorId: authorId,
+      parentThreadId,
     },
   });
 
@@ -51,4 +74,13 @@ export const incrementUpvotes = async (threadId: string): Promise<number> => {
   broadcastUpvoteChangedEvent(threadId, upvotes);
 
   return upvotes;
+};
+
+export const addReply = async (
+  authorId: string,
+  threadId: string,
+  message: string
+) => {
+  const reply = await create(authorId, { message }, threadId);
+  console.log('🚀 ~ file: thread.ts ~ line 67 ~ reply', reply);
 };

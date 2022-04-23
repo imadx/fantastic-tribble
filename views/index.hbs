@@ -4,7 +4,6 @@
   <div class='discussion-input'>
     <form action='/thread' method="POST">
       <div class='row'>
-        <input name="currentAuthor.name" type="hidden" value="{{currentAuthor.name}}">
         <div class='avatar'>
           <img src="{{currentAuthor.photoURL}}" alt="Profile image of {{currentAuthor.name}}">
         </div>
@@ -18,7 +17,7 @@
 
   <div class='discussion-threads'>
   {{#each threads as |thread|}}
-    <div class='discussion-thread--wrapper{{#if thread.replies.length }} discussion-thread--has-nested {{/if}}'>
+    <div class='discussion-thread--wrapper{{#if thread.childThreads.length }} discussion-thread--has-nested {{/if}}'>
       <div class='discussion-thread row'>
         <div class='discussion-thread--avatar avatar'>
           <img src="{{thread.author.photoURL}}" alt="Profile image of {{thread.author.name}}">
@@ -33,17 +32,25 @@
             {{thread.message}}
           </div>
           <div class='actions'>
-            <div class="action-upvote-container" data-thread-id="{{thread.id}}" data-upvotes="{{thread.upvotes}}">
-            </div>
+            <div class="action-upvote-container" data-thread-id="{{thread.id}}" data-upvotes="{{thread.upvotes}}"></div>
             <div>
-              <a href='#' class="disabled">Reply</a>
+              <a href='#' class="action-reply" data-thread-id="{{thread.id}}">Reply</a>
             </div>
           </div>
+          <form class="discussion-thread--form" action='/thread/{{thread.id}}/reply' method="POST" data-thread-id="{{thread.id}}"  >
+            <div class='row'>
+              <div class='avatar'>
+                <img src="{{../currentAuthor.photoURL}}" alt="Profile image of {{../currentAuthor.name}}">
+              </div>
+              <input name="message" class='grow' type='text' placeholder='What are your thoughts?' />
+              <button>Reply</button>
+            </div>
+          </form>
         </div>
       </div>
 
-    {{#each thread.replies as |thread|}}
-      <div class='discussion-thread--wrapper {{#if thread.replies.length }} discussion-thread--has-nested {{/if}}'>
+    {{#each thread.childThreads as |thread|}}
+      <div class='discussion-thread--wrapper {{#if thread.childThreads.length }} discussion-thread--has-nested {{/if}}'>
         <div class='discussion-thread row'>
           <div class='discussion-thread--avatar avatar'>
             <img src="{{thread.author.photoURL}}" alt="Profile image of {{thread.author.name}}">
@@ -59,7 +66,6 @@
             </div>
             <div class='actions'>
               <a href='#' class='action-upvote' data-thread-id="{{thread.id}}" data-upvotes="{{thread.upvotes}}">Upvote</a>
-              <a href='#' class="disabled">Reply</a>
             </div>
           </div>
         </div>

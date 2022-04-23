@@ -18,7 +18,9 @@ window.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
 
-      const element = document.querySelector(`[data-thread-id="${threadId}"]`);
+      const element = document.querySelector(
+        `.action-upvote[data-thread-id="${threadId}"]`
+      );
       if (element.dataset.upvotes === '-') {
         element.dataset.upvotes = '0';
       }
@@ -41,6 +43,20 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       };
       xhr.send(null);
+    });
+  });
+
+  document.querySelectorAll('.action-reply').forEach((item) => {
+    const { threadId } = item.dataset;
+    if (!threadId) {
+      return;
+    }
+
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const form = document.querySelector(`form[data-thread-id="${threadId}"]`);
+      form.classList.toggle('discussion-thread--form--visible');
     });
   });
 });
