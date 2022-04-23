@@ -1,3 +1,7 @@
+# Demo
+
+Visit https://imadx-fantastic-tribble.herokuapp.com/ for the live demo.
+
 # Getting started
 
 Install dependencies and run the app in dev mode with the following.
