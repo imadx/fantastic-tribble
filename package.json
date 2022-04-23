@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "ts-node bin/www.ts",
+    "build": "npx prisma migrate deploy",
     "dev:start": "npm run start",
     "dev:sass": "node-sass ./style/main.scss public/stylesheets/style.css --watch",
     "dev": "concurrently --kill-others npm:dev:*",
