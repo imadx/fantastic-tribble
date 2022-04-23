@@ -22754,7 +22754,7 @@
   // frontend/components/upvote.tsx
   var import_react2 = __toESM(require_react());
 
-  // frontend/hooks/upvotes.tsx
+  // frontend/hooks/upvotes.ts
   var import_react = __toESM(require_react());
 
   // node_modules/socket.io-client/build/esm/url.js
@@ -24699,7 +24699,7 @@
     connect: lookup2
   });
 
-  // frontend/hooks/upvotes.tsx
+  // frontend/hooks/upvotes.ts
   var socket = lookup2();
   var CUSTOM_EVENT_UPVOTES = "custom-event-upvotes";
   socket.on("upvote-changed", (data) => {
