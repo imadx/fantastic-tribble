@@ -19,6 +19,10 @@ window.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
 
       const element = document.querySelector(`[data-thread-id="${threadId}"]`);
+      if (element.dataset.upvotes === '-') {
+        element.dataset.upvotes = '0';
+      }
+
       element.dataset.upvotes = Number(element.dataset.upvotes) + 1;
 
       var xhr = new XMLHttpRequest();
@@ -32,6 +36,8 @@ window.addEventListener('DOMContentLoaded', () => {
           }
 
           element.dataset.upvotes = response.count;
+        } else {
+          element.dataset.upvotes = '-';
         }
       };
       xhr.send(null);

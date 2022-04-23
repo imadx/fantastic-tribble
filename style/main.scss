@@ -155,7 +155,7 @@ hr {
     .action-upvote {
       display: flex;
       align-items: center;
-      
+
       &::before {
         content: '';
         display: inline-block;
@@ -172,6 +172,12 @@ hr {
       &[data-upvotes='0'] {
         &::after {
           display: none;
+        }
+      }
+
+      &[data-upvotes='-'] {
+        &::after {
+          filter: hue-rotate(180deg);
         }
       }
 

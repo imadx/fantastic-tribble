@@ -6,6 +6,7 @@
 import app from '../app';
 import debug from 'debug';
 import http from 'http';
+import { prisma } from '../services/prisma';
 
 debug('ghost-task:server');
 
@@ -23,6 +24,7 @@ const server = http.createServer(app);
  */
 
 server.listen(port);
+server.on('close', onClose);
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -36,10 +38,20 @@ function getNormalizedPort(val: string): number | null {
 }
 
 /**
+ * Event listener for HTTP server "close" event.
+ */
+
+function onClose() {
+  prisma.$disconnect();
+}
+
+/**
  * Event listener for HTTP server "error" event.
  */
 
 function onError(exception: OnErrorException) {
+  prisma.$disconnect();
+
   if (exception.syscall !== 'listen') {
     throw exception;
   }

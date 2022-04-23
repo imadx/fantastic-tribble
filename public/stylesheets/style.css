@@ -121,6 +121,8 @@ hr {
         transform: scale(0.7) translateY(0.2rem); }
       .discussion-thread--content .actions .action-upvote[data-upvotes='0']::after {
         display: none; }
+      .discussion-thread--content .actions .action-upvote[data-upvotes='-']::after {
+        filter: hue-rotate(180deg); }
       .discussion-thread--content .actions .action-upvote::after {
         content: attr(data-upvotes);
         display: inline-block;

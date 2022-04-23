@@ -1,14 +1,3 @@
-export interface Thread {
-  id: string;
-  author: {
-    name: string;
-    photoURL: string;
-  };
+export type ThreadPayload = {
   message: string;
-  createdAt: Date;
-  upvotes: number;
-  replies: Thread[];
-}
-
-export type ThreadCreateDto = Partial<Thread> &
-  Required<Pick<Thread, 'author' | 'message'>>;
+};
