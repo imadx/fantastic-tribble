@@ -81,6 +81,5 @@ export const addReply = async (
   threadId: string,
   message: string
 ) => {
-  const reply = await create(authorId, { message }, threadId);
-  console.log('🚀 ~ file: thread.ts ~ line 67 ~ reply', reply);
+  return create(authorId, { message }, threadId);
 };
