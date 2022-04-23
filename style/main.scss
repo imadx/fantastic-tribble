@@ -1,8 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+$color-black: #000000;
+$color-black-body: #21293c;
+$color-grey: #4b587c;
+$color-border: #e5e5e5;
+$color-accent: #7e34f6;
+$color-white: #ffffff;
+
 body {
-  padding: 50px;
-  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5 !important;
+  color: $color-black-body;
+  background-color: $color-border;
+  margin: 0;
+  padding: 3rem;
+
+  @media (max-width: 40rem) {
+    padding: 1rem;
+  }
 }
 
 a {
-  color: #00b7ff;
+  color: $color-grey;
+  font-weight: 600;
+}
+
+h1 {
+  color: $color-black;
+  margin: 0;
+  margin-bottom: 2rem;
+
+  @media (max-width: 40rem) {
+    font-size: 2rem;
+  }
+}
+
+input,
+button {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  border: solid thin $color-border;
+  text-overflow: ellipsis;
+}
+
+button {
+  background-color: $color-accent;
+  color: $color-white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  font-weight: 700;
+}
+
+hr {
+  margin: 3rem 0;
+  border: none;
+  border-bottom: solid thin $color-border;
+}
+
+.avatar {
+  width: 2rem;
+  height: 2rem;
+  min-width: 2rem;
+  background-color: $color-black-body;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0.2rem 2rem 0 rgba($color-black-body, 0.2);
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+
+  .grow {
+    flex-grow: 1;
+  }
+
+  @media (max-width: 40rem) {
+    flex-wrap: wrap;
+  }
+}
+
+.discussion-container {
+  max-width: 60rem;
+  margin: 0 auto;
+  background-color: $color-white;
+  padding: 3rem 2rem;
+  border-radius: 4px;
+  box-shadow: 0 2rem 8rem -4rem rgba($color-black-body, 0.3),
+    0 1rem 3rem -1rem rgba($color-black-body, 0.3);
+}
+
+.discussion-input {
+  @media (max-width: 40rem) {
+    input,
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.discussion-threads {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  .discussion-thread {
+    display: flex;
+
+    .content {
+    }
+  }
+}
+
+.discussion-thread--content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .summary {
+    gap: 0.5rem;
+
+    .user {
+      font-weight: 600;
+    }
+
+    .created-at {
+      color: $color-grey;
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+
+    a {
+      text-decoration: none;
+      transition: opacity 0.15s;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    .action-upvote {
+      &::before {
+        content: '';
+        display: inline-block;
+        margin-right: 0.3rem;
+        width: 0;
+        height: 0;
+        border-left: 0.5rem solid transparent;
+        border-right: 0.5rem solid transparent;
+        border-bottom: 0.85rem solid currentColor;
+        transition: transform 0.15s;
+        transform: scale(0.7) translateY(0.2rem);
+      }
+
+      &:hover {
+        &::before {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}
+
+.discussion-thread--wrapper {
+  &.discussion-thread--has-nested {
+    position: relative;
+
+    &::before {
+      $border-width: 2px;
+
+      position: absolute;
+      top: 2rem;
+      left: calc(1rem - #{$border-width/2});
+      content: '';
+      display: block;
+      height: calc(100% - 2rem);
+      width: $border-width;
+      border-radius: #{$border-width/2};
+      background-color: $color-border;
+    }
+  }
+
+  .discussion-thread--wrapper {
+    margin-top: 2rem;
+    padding-left: 3rem;
+  }
 }

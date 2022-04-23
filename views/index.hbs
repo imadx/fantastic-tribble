@@ -1,2 +1,67 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class='discussion-container'>
+  <h1>Discussion</h1>
+
+  <div class='discussion-input'>
+    <form action=''>
+      <div class='row'>
+        <div class='avatar'>
+          <img src="{{currentAuthor.photoURL}}" alt="Profile image of {{currentAuthor.name}}">
+        </div>
+        <input class='grow' type='text' placeholder='What are your thoughts?' />
+        <button>Comment</button>
+      </div>
+    </form>
+  </div>
+
+  <hr />
+
+  <div class='discussion-threads'>
+  {{#each threads as |thread|}}
+    <div class='discussion-thread--wrapper{{#if thread.replies.length }} discussion-thread--has-nested {{/if}}'>
+      <div class='discussion-thread row'>
+        <div class='discussion-thread--avatar avatar'>
+          <img src="{{thread.author.photoURL}}" alt="Profile image of {{thread.author.name}}">
+        </div>
+        <div class='discussion-thread--content'>
+          <div class='summary row'>
+            <div class='user'>{{thread.author.name}}</div>
+            &bull;
+            <div class='created-at'>{{thread.createdAt}}</div>
+          </div>
+          <div class='message'>
+            {{thread.message}}
+          </div>
+          <div class='actions'>
+            <a href='#' class='action-upvote'>Upvote</a>
+            <a href='#'>Reply</a>
+          </div>
+        </div>
+      </div>
+
+    {{#each thread.replies as |thread|}}
+      <div class='discussion-thread--wrapper {{#if thread.replies.length }} discussion-thread--has-nested {{/if}}'>
+        <div class='discussion-thread row'>
+          <div class='discussion-thread--avatar avatar'>
+            <img src="{{thread.author.photoURL}}" alt="Profile image of {{thread.author.name}}">
+          </div>
+          <div class='discussion-thread--content'>
+            <div class='summary row'>
+              <div class='user'>{{thread.author.name}}</div>
+              &bull;
+              <div class='created-at'>{{thread.createdAt}}</div>
+            </div>
+            <div class='message'>
+              {{thread.message}}
+            </div>
+            <div class='actions'>
+              <a href='#' class='action-upvote'>Upvote</a>
+              <a href='#'>Reply</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+    </div>
+  {{/each}}
+  </div>
+</div>
