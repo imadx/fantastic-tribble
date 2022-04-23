@@ -7,6 +7,7 @@
     "build": "npx prisma migrate deploy",
     "dev:start": "npm run start",
     "dev:sass": "node-sass ./style/main.scss public/stylesheets/style.css --watch",
+    "dev:tsx": "esbuild ./frontend/main.tsx --outfile=./public/javascripts/frontend.js --bundle --watch",
     "dev": "concurrently --kill-others npm:dev:*",
     "prisma": "npx prisma"
   },
@@ -19,6 +20,10 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "prisma": "^3.12.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
     "ts-node": "^10.7.0"
   },
   "devDependencies": {
@@ -29,7 +34,10 @@
     "@types/http-errors": "^1.8.2",
     "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.25",
+    "@types/socket.io": "^3.0.2",
+    "@types/socket.io-client": "^3.0.0",
     "concurrently": "^7.1.0",
+    "esbuild": "^0.14.38",
     "node-sass": "^7.0.1",
     "typescript": "^4.6.3"
   },

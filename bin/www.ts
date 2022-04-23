@@ -7,6 +7,7 @@ import app from '../app';
 import debug from 'debug';
 import http from 'http';
 import { prisma } from '../services/prisma';
+import { initializeSocketIO } from '../services/socket';
 
 debug('ghost-task:server');
 
@@ -18,6 +19,7 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
+initializeSocketIO(server);
 
 /**
  * Listen on provided port, on all network interfaces.

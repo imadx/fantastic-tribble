@@ -33,8 +33,11 @@
             {{thread.message}}
           </div>
           <div class='actions'>
-            <a href='#' class='action-upvote' data-thread-id="{{thread.id}}" data-upvotes="{{thread.upvotes}}">Upvote</a>
-            <a href='#' class="disabled">Reply</a>
+            <div class="action-upvote-container" data-thread-id="{{thread.id}}" data-upvotes="{{thread.upvotes}}">
+            </div>
+            <div>
+              <a href='#' class="disabled">Reply</a>
+            </div>
           </div>
         </div>
       </div>

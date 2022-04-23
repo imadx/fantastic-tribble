@@ -1,5 +1,6 @@
 import { ThreadPayload } from '../types';
 import { prisma } from './prisma';
+import { broadcastUpvoteChangedEvent } from './socket';
 
 export const find = async () => {
   return prisma.thread.findMany({
@@ -46,6 +47,8 @@ export const incrementUpvotes = async (threadId: string): Promise<number> => {
       },
     },
   });
+
+  broadcastUpvoteChangedEvent(threadId, upvotes);
 
   return upvotes;
 };
