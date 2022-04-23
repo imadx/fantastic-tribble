@@ -105,19 +105,34 @@ hr {
       transition: opacity 0.15s; }
       .discussion-thread--content .actions a:hover {
         opacity: 0.7; }
-    .discussion-thread--content .actions .action-upvote::before {
-      content: '';
-      display: inline-block;
-      margin-right: 0.3rem;
-      width: 0;
-      height: 0;
-      border-left: 0.5rem solid transparent;
-      border-right: 0.5rem solid transparent;
-      border-bottom: 0.85rem solid currentColor;
-      transition: transform 0.15s;
-      transform: scale(0.7) translateY(0.2rem); }
-    .discussion-thread--content .actions .action-upvote:hover::before {
-      transform: scale(1); }
+    .discussion-thread--content .actions .action-upvote {
+      display: flex;
+      align-items: center; }
+      .discussion-thread--content .actions .action-upvote::before {
+        content: '';
+        display: inline-block;
+        margin-right: 0.3rem;
+        width: 0;
+        height: 0;
+        border-left: 0.5rem solid transparent;
+        border-right: 0.5rem solid transparent;
+        border-bottom: 0.85rem solid currentColor;
+        transition: transform 0.15s;
+        transform: scale(0.7) translateY(0.2rem); }
+      .discussion-thread--content .actions .action-upvote[data-upvotes='0']::after {
+        display: none; }
+      .discussion-thread--content .actions .action-upvote::after {
+        content: attr(data-upvotes);
+        display: inline-block;
+        margin-left: 0.3rem;
+        background-color: #4b587c;
+        color: #ffffff;
+        padding: 0 0.2rem;
+        border-radius: 0.3rem;
+        font-size: smaller;
+        font-family: monospace; }
+      .discussion-thread--content .actions .action-upvote:hover::before {
+        transform: scale(1); }
 
 .discussion-thread--wrapper.discussion-thread--has-nested {
   position: relative; }

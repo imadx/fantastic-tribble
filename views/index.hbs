@@ -2,12 +2,13 @@
   <h1>Discussion</h1>
 
   <div class='discussion-input'>
-    <form action=''>
+    <form action='/thread' method="POST">
       <div class='row'>
+        <input name="currentAuthor.name" type="hidden" value="{{currentAuthor.name}}">
         <div class='avatar'>
           <img src="{{currentAuthor.photoURL}}" alt="Profile image of {{currentAuthor.name}}">
         </div>
-        <input class='grow' type='text' placeholder='What are your thoughts?' />
+        <input name="message" class='grow' type='text' placeholder='What are your thoughts?' />
         <button>Comment</button>
       </div>
     </form>
@@ -32,7 +33,7 @@
             {{thread.message}}
           </div>
           <div class='actions'>
-            <a href='#' class='action-upvote'>Upvote</a>
+            <a href='#' class='action-upvote' data-thread-id="{{thread.id}}" data-upvotes="{{thread.upvotes}}">Upvote</a>
             <a href='#'>Reply</a>
           </div>
         </div>
@@ -54,7 +55,7 @@
               {{thread.message}}
             </div>
             <div class='actions'>
-              <a href='#' class='action-upvote'>Upvote</a>
+              <a href='#' class='action-upvote' data-thread-id="{{thread.id}}" data-upvotes="{{thread.upvotes}}">Upvote</a>
               <a href='#'>Reply</a>
             </div>
           </div>

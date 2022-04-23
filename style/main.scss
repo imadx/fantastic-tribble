@@ -153,6 +153,9 @@ hr {
     }
 
     .action-upvote {
+      display: flex;
+      align-items: center;
+      
       &::before {
         content: '';
         display: inline-block;
@@ -164,6 +167,24 @@ hr {
         border-bottom: 0.85rem solid currentColor;
         transition: transform 0.15s;
         transform: scale(0.7) translateY(0.2rem);
+      }
+
+      &[data-upvotes='0'] {
+        &::after {
+          display: none;
+        }
+      }
+
+      &::after {
+        content: attr(data-upvotes);
+        display: inline-block;
+        margin-left: 0.3rem;
+        background-color: $color-grey;
+        color: $color-white;
+        padding: 0 0.2rem;
+        border-radius: 0.3rem;
+        font-size: smaller;
+        font-family: monospace;
       }
 
       &:hover {
