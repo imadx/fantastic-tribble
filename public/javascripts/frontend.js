@@ -1041,7 +1041,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect2(create, deps) {
+          function useEffect3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1821,7 +1821,7 @@
           exports.useContext = useContext;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect2;
+          exports.useEffect = useEffect3;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
@@ -24723,9 +24723,22 @@
   // frontend/components/upvote.tsx
   var Upvote = ({ id, count }) => {
     const [upvoteCount, setUpvoteCount] = (0, import_react2.useState)(count.toString());
+    const [isChangeAnimationVisible, setIsChangeAnimationVisible] = (0, import_react2.useState)(false);
     useUpvoteCount(id, (count2) => {
-      setUpvoteCount(count2);
+      setUpvoteCount(count2.toString());
+      setTimeout(() => {
+        setIsChangeAnimationVisible(true);
+      }, 0);
     });
+    (0, import_react2.useEffect)(() => {
+      const timeout = setTimeout(() => {
+        setIsChangeAnimationVisible(false);
+      }, 300);
+      return () => {
+        clearTimeout(timeout);
+        setIsChangeAnimationVisible(false);
+      };
+    }, [upvoteCount]);
     const handleOnClick = (e) => __async(void 0, null, function* () {
       e.preventDefault();
       try {
@@ -24735,9 +24748,13 @@
         setUpvoteCount("-");
       }
     });
+    const classNames = ["action-upvote"];
+    if (isChangeAnimationVisible) {
+      classNames.push("action-upvote--animating");
+    }
     return /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement("a", {
       href: "#",
-      className: "action-upvote",
+      className: classNames.join(" "),
       "data-thread-id": id,
       "data-upvotes": upvoteCount,
       onClick: handleOnClick

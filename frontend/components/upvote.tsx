@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUpvoteCount } from '../hooks/upvotes';
 
 interface UpvoteProps {
@@ -8,10 +8,26 @@ interface UpvoteProps {
 
 export const Upvote = ({ id, count }: UpvoteProps) => {
   const [upvoteCount, setUpvoteCount] = useState(count.toString());
+  const [isChangeAnimationVisible, setIsChangeAnimationVisible] =
+    useState(false);
 
   useUpvoteCount(id, (count) => {
-    setUpvoteCount(count);
+    setUpvoteCount(count.toString());
+    setTimeout(() => {
+      setIsChangeAnimationVisible(true);
+    }, 0);
   });
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsChangeAnimationVisible(false);
+    }, 300);
+
+    return () => {
+      clearTimeout(timeout);
+      setIsChangeAnimationVisible(false);
+    };
+  }, [upvoteCount]);
 
   const handleOnClick = async (e: MouseEvent) => {
     e.preventDefault();
@@ -24,11 +40,16 @@ export const Upvote = ({ id, count }: UpvoteProps) => {
     }
   };
 
+  const classNames = ['action-upvote'];
+  if (isChangeAnimationVisible) {
+    classNames.push('action-upvote--animating');
+  }
+
   return (
     <>
       <a
         href="#"
-        className="action-upvote"
+        className={classNames.join(' ')}
         data-thread-id={id}
         data-upvotes={upvoteCount}
         onClick={handleOnClick}
