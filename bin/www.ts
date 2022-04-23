@@ -71,7 +71,7 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-export interface OnErrorException extends Error {
+interface OnErrorException extends Error {
   code?: string;
   syscall?: string;
 }
